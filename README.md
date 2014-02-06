@@ -1,4 +1,5 @@
-# P8 Javascript Dynamic Elements And Events 
+# P8 JavaScript Dynamic Elements And Events 
+
 ## Learning Competencies
 
 * Use jQuery to implement Event Delegation with the `on` function

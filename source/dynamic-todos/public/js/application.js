@@ -32,10 +32,12 @@ function buildTodo(todo) {
     type: "POST",
     url: todo.action,
     data: {todo_content: $(todo).find("input[name=todo_content]").val()}
-  }).done(function(todo){
+  }).done(function(response){
     var $pending = $('.pending').first();
     $pending.find('input').prop('disabled', false);
     $pending.find('.saving').addClass("saved").removeClass("saving").text("Saved!");
+    $pending.find('.complete').attr('value', '/todo/' + response);
+    $pending.find('.delete').attr('action', '/todo/' + response);
   })
 }
 

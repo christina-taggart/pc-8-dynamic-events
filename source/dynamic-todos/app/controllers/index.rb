@@ -4,7 +4,8 @@ get '/' do
 end
 
 post '/add_todo' do
-  Todo.create(todo_content: params[:todo_content])
+  todo = Todo.create(todo_content: params[:todo_content])
+  [200, {}, "#{todo.id}"]
 end
 
 put '/todo/:id' do

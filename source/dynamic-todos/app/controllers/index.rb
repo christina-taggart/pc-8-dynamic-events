@@ -8,3 +8,9 @@ post '/todos' do
   new_todo.todo_content
 end
 
+delete '/todos' do
+  deleted_todo = Todo.find_by_todo_content(params[:todoContent])
+  deleted_todo.destroy
+  deleted_todo.todo_content
+end
+

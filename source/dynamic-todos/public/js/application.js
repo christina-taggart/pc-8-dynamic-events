@@ -10,24 +10,55 @@ $(document).ready(function() {
       addTodo(toDoContent);
     })
 
+    // Delete todo event handler
+    $('.delete').on('click', function(event) {
+      event.preventDefault();
+      todoContent = getTodoContent($(this));
+      deleteTodo(todoContent);
+    })
 
   }
 
+  //-----AJAX REQUEST/RESPONSES-----
+
   // Add Todo
-  var addTodo = function(toDoContent) {
+  var addTodo = function(todoContentSerialized) {
     $.ajax({
       method: 'post',
       url: '/todos',
-      data: toDoContent
+      data: todoContentSerialized
     }).done(function(serverResponse) {
-      $('.todo_list').append(buildTodo(serverResponse));
+      appendTodoDiv(serverResponse);
     }).fail(function() {
       console.log("Request failed")
     })
   }
 
   // Delete todo
-  
+  var deleteTodo = function(todoContent) {
+    $.ajax({
+      method: 'delete',
+      url: '/todos',
+      data: {"todoContent": todoContent}
+    }).done(function(serverResponse) {
+      removeTodoDiv(serverResponse);
+    }).fail(function() {
+      console.log("Request failed");
+    })
+  }
+
+  //-----DOM/HTML MANIPULATION-----
+
+  var appendTodoDiv = function(todoContent) {
+    $('.todo_list').append(buildTodo(todoContent));
+  }
+
+
+  var removeTodoDiv = function(todoContent) {
+    todoHeader = $('h2').filter(function() { return $(this).text() === todoContent } );
+    todoDiv = $('.todo_list .todo').has(todoHeader);
+    todoDiv.remove();
+  }
 
   // Build Todo HTML with given content
   var buildTodo = function(todoContent) {
@@ -37,6 +68,13 @@ $(document).ready(function() {
     $todo.find('h2').text(todoContent);
     // Returns the jQueryDOMElement to be used elsewhere.
     return $todo;
+  }
+
+  // Helper that takes a '.delete' or '.complete' DOMElement and returns
+  // the todo content found in the same div. The todo content is stored
+  // between h2 tags.
+  var getTodoContent = function(todoButtonElement) {
+    return todoButtonElement.parents().eq(2).find('h2').text();
   }
 
   bindEvents();

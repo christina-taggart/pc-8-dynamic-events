@@ -7,7 +7,6 @@ $(document).ready(function() {
     $('.toolbox form').on('submit', function(event) {
       event.preventDefault();
       toDoContent = $(this).serialize();
-      console.log(toDoContent)
       addTodo(toDoContent);
     })
 
@@ -16,7 +15,6 @@ $(document).ready(function() {
 
   // Add Todo
   var addTodo = function(toDoContent) {
-    console.log(toDoContent)
     $.ajax({
       method: 'post',
       url: '/todos',
@@ -27,6 +25,9 @@ $(document).ready(function() {
       console.log("Request failed")
     })
   }
+
+  // Delete todo
+  
 
   // Build Todo HTML with given content
   var buildTodo = function(todoContent) {

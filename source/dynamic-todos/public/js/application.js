@@ -38,6 +38,7 @@ function buildTodo(todo) {
     $pending.find('.saving').addClass("saved").removeClass("saving").text("Saved!");
     $pending.find('.complete').attr('value', '/todo/' + response);
     $pending.find('.delete').attr('action', '/todo/' + response);
+    $pending.removeClass("pending");
   })
 }
 
@@ -46,9 +47,9 @@ function todoTemplate(){
 }
 
 function renderTodo(todo) {
-  var view = {content: $(todo).find("input[name=todo_content]").val()}
+  var itemName = {content: $(todo).find("input[name=todo_content]").val()}
   var template = todoTemplate();
-  var toView = Mustache.render(template, view);
+  var toView = Mustache.render(template, itemName);
   $(".todo_list ul").append(toView);
 }
 

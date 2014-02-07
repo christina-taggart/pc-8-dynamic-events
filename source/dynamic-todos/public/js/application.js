@@ -2,12 +2,16 @@ $(document).ready(function() {
   var todoTemplate = $.trim($('#todo_template').html());
 
   function bindEvents() {
+    
+    // Add Todo event handler
     $('.toolbox form').on('submit', function(event) {
       event.preventDefault();
       toDoContent = $(this).serialize();
       console.log(toDoContent)
       addTodo(toDoContent);
     })
+
+
   }
 
   // Add Todo

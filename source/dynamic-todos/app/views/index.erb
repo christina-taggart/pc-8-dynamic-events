@@ -7,16 +7,17 @@
   </div>
 
   <div class="todo_list">
-
-  </div>
-
-  <div id="todo_template" style="display: none;">
-    <div class="todo">
-      <h2>Todo Name</h2>
-      <ul>
-        <li><a href="#" class="delete">Delete</a></li>
-        <li><a href="#" class="complete">Complete</a></li>
-      </ul>
+    <% @todos.each do |todo| %>
+    <div id="todo_template">
+      <div class="todo">
+        <h2><%= todo.todo_content %></h2>
+        <ul>
+          <li><a href="#" class="delete">Delete</a></li>
+          <li><a href="#" class="complete">Complete</a></li>
+        </ul>
+      </div>
     </div>
+    <% end %>
   </div>
+
 </div>

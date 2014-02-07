@@ -13,5 +13,19 @@
 </head>
 <body>
   <%= yield %>
+  <div id="template">
+    <div class='draggable'>
+      <li class='pending'>
+        <table>
+          <td><input class='complete' type='checkbox' name='completed' disabled /></td>
+          <td>{{content}}</td>
+          <td><form class='delete' action='/todo/'>
+            <input type='submit' value='Delete' disabled>
+          </form></td>
+          <td><span class='status saving'>Saving...</span></td>
+        </table>
+      </li>
+    </div>
+  </div>
 </body>
 </html>

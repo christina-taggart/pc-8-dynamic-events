@@ -40,7 +40,7 @@ function buildTodo(todo) {
 }
 
 function todoTemplate(){
-  return "<div class='draggable'><li class='pending'><input class='complete' type='checkbox' name='completed' disabled /> {{content}} <form class='delete' action='/todo/'><input type='submit' value='Delete' disabled></form> <span class='status saving'>Saving...</span></li></div>"
+  return $("#template").html();
 }
 
 function renderTodo(todo) {

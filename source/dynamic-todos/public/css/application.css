@@ -37,6 +37,14 @@ li {
   color: green;
 }
 
+#template {
+  display: none;
+}
+
+table td {
+  padding: 5px;
+}
+
 [draggable] {
   -moz-user-select: none;
   -khtml-user-select: none;

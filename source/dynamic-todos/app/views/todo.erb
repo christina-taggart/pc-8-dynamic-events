@@ -1,0 +1,13 @@
+<ul>
+  <% @todos.each do |todo| %>
+  <div class="draggable" draggable="true">
+    <li>
+      <input class="complete" value="/todo/<%= todo.id %>" type="checkbox" name="completed" <% if todo.completed %>checked<% end %> />
+      <%= todo.todo_content %>
+      <form class="delete" action="/todo/<%= todo.id %>">
+        <input type="submit" value="Delete">
+      </form>
+    </li>
+  </div>
+  <% end %>
+</ul>

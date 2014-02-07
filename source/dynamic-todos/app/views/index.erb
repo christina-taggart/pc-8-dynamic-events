@@ -10,11 +10,10 @@
     <% @todos.each do |todo| %>
     <div id="todo_template">
       <div class="todo">
-        <h2><%= todo.todo_content %></h2>
+        <h2 <% if todo.completed %>style="text-decoration: line-through;" <% end %> >
+          <%= todo.todo_content %>
+        </h2>
         <ul>
-          <% if todo.completed %>
-            <li>Completed!</li>
-          <% end %>
           <li><a href="#" class="delete">Delete</a></li>
           <li><a href="#" class="complete">Complete</a></li>
         </ul>

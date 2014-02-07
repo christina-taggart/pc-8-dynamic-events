@@ -14,3 +14,10 @@ delete '/todos' do
   deleted_todo.todo_content
 end
 
+patch '/todos' do
+  completed_todo = Todo.find_by_todo_content(params[:todoContent])
+  completed_todo.completed = true
+  completed_todo.save
+  completed_todo.todo_content
+end 
+

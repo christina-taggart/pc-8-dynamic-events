@@ -17,6 +17,12 @@ $(document).ready(function() {
       deleteTodo(todoContent);
     })
 
+    // Complete todo event handler
+    $('.todo_list').on('click', '.complete', function(event) {
+      event.preventDefault();
+      todoContent = getTodoContent($(this));
+      completeTodo(todoContent);
+    })
   }
 
   //-----AJAX REQUEST/RESPONSES-----
@@ -47,6 +53,19 @@ $(document).ready(function() {
     })
   }
 
+  // Complete todo
+  var completeTodo = function(todoContent) {
+    $.ajax({
+      method: 'patch',
+      url: '/todos',
+      data: {"todoContent": todoContent}
+    }).done(function(serverResponse) {
+      completeTodoDiv(serverResponse);
+    }).fail(function() {
+      console.log("Request failed");
+    })
+  }
+
   //-----DOM/HTML MANIPULATION-----
 
   var appendTodoDiv = function(todoContent) {
@@ -58,6 +77,11 @@ $(document).ready(function() {
     todoHeader = $('h2').filter(function() { return $(this).text() === todoContent } );
     todoDiv = $('.todo_list .todo').has(todoHeader);
     todoDiv.remove();
+  }
+
+  var completeTodoDiv = function(todoContent) {
+    todoHeader = $('h2').filter(function() { return $(this).text() === todoContent } );
+    todoHeader.css('text-decoration', 'line-through');
   }
 
   // Build Todo HTML with given content

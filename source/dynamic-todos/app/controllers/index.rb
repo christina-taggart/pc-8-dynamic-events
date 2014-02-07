@@ -3,7 +3,8 @@ get '/' do
   erb :index
 end
 
-post '/add_todo' do
-  p "Inside /add_todo route!"
+post '/todos' do
+  new_todo = Todo.create(params)
+  new_todo.todo_content
 end
 

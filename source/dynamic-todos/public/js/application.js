@@ -2,23 +2,39 @@ $(document).ready(function() {
   var todoTemplate = $.trim($('#todo_template').html());
 
   function bindEvents() {
-    // Bind functions which add, remove, and complete todos to the appropriate
-    // elements
+    $('.toolbox form').on('submit', function(event) {
+      event.preventDefault();
+      toDoContent = $(this).serialize();
+      console.log(toDoContent)
+      addTodo(toDoContent);
+    })
   }
 
-  //Create functions to add, remove and complete todos
+  // Add Todo
+  var addTodo = function(toDoContent) {
+    console.log(toDoContent)
+    $.ajax({
+      method: 'post',
+      url: '/todos',
+      data: toDoContent
+    }).done(function(serverResponse) {
+      $('.todo_list').append(buildTodo(serverResponse));
+    }).fail(function() {
+      console.log("Request failed")
+    })
+  }
 
-
-
-  function buildTodo(todoName) {
+  // Build Todo HTML with given content
+  var buildTodo = function(todoContent) {
     // Creates an jQueryDOMElement from the todoTemplate.
     var $todo = $(todoTemplate);
     // Modifies it's text to use the passed in todoName.
-    $todo.find('h2').text(todoName);
+    $todo.find('h2').text(todoContent);
     // Returns the jQueryDOMElement to be used elsewhere.
     return $todo;
   }
 
-
   bindEvents();
 });
+
+

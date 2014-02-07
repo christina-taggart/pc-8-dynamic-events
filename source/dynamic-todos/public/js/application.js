@@ -32,13 +32,15 @@ function buildTodo(todo) {
     type: "POST",
     url: todo.action,
     data: {todo_content: $(todo).find("input[name=todo_content]").val()}
-  }).done(function(){
-
+  }).done(function(todo){
+    var $pending = $('.pending').first();
+    $pending.find('input').prop('disabled', false);
+    $pending.find('.saving').addClass("saved").removeClass("saving").text("Saved!");
   })
 }
 
 function todoTemplate(){
-  return "<div class='draggable'><input class='complete' type='checkbox' name='completed'/><li>{{content}}</li><form class='delete' action='/todo/'><input type='submit' value='Delete'></form></div>"
+  return "<div class='draggable'><li class='pending'><input class='complete' type='checkbox' name='completed' disabled /> {{content}} <form class='delete' action='/todo/'><input type='submit' value='Delete' disabled></form> <span class='status saving'>Saving...</span></li></div>"
 }
 
 function renderTodo(todo) {
@@ -70,16 +72,18 @@ function completeTodo(todo){
   })
 }
 
-// Drag and drop code below
+/////////////////
+// DRAG AND DROP
+/////////////////
+
 var dragSourceElement = null;
 
 function handleDragStart(e){
   this.style.opacity = '0.4';
 
   dragSourceElement = this;
-    // debugger
-    e.originalEvent.dataTransfer.effectAllowed = 'move';
-    e.originalEvent.dataTransfer.setData('text/html', this.innerHTML);
+  e.originalEvent.dataTransfer.effectAllowed = 'move';
+  e.originalEvent.dataTransfer.setData('text/html', this.innerHTML);
 }
 
 function handleDragEnter(e){

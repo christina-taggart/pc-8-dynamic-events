@@ -29,6 +29,14 @@ li {
   border: 3px dotted black;
 }
 
+.saving {
+  color: grey;
+}
+
+.saved {
+  color: green;
+}
+
 [draggable] {
   -moz-user-select: none;
   -khtml-user-select: none;

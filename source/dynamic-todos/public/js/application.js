@@ -11,7 +11,7 @@ $(document).ready(function() {
     })
 
     // Delete todo event handler
-    $('.delete').on('click', function(event) {
+    $('.todo_list').on('click', '.delete', function(event) {
       event.preventDefault();
       todoContent = getTodoContent($(this));
       deleteTodo(todoContent);

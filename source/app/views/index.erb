@@ -1,0 +1,30 @@
+
+<div id="todo">
+  <div class="toolbox">
+    <form class="add-todo" action="/add_todo" method="post">
+      <input type="text" class="todo" placeholder="Put your todo item here!" name="todo_content"/>
+      <input type="submit" value="Add Todo"/>
+      <!-- <button class="add" type="submit">Add Todo</button> -->
+    </form>
+  </div>
+
+  <div class="todo_list">
+    <%= erb :todo %>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  var todos = <%= @todos[0].to_json %>
+  var view = {
+    "name": "Chris",
+    "company": "<b>GitHub</b>"
+  }
+  var output = Mustache.render("{{name}} and {{{company}}}", view)
+  $("#mustache-test").html(output);
+  // $.each(todos, function(key,value){
+  //   var template = "<li>{{todos.key}}</li>"
+  //   var html = Mustach.to_html(template, todos);
+  //   $('/area').html(html)
+  // })
+</script>

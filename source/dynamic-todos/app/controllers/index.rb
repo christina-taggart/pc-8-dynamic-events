@@ -4,6 +4,9 @@ get '/' do
 end
 
 post '/add_todo' do
-  p "Inside /add_todo route!"
+  content_type :json
+
+  @todo = Todo.create(params)
+  @todo.to_json
 end
 

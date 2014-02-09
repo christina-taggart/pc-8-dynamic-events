@@ -1,9 +1,14 @@
 get '/' do
-  # Look in app/views/index.erb
-  erb :index
+  redirect '/todos'
 end
 
 post '/add_todo' do
-  Todo.create(params)
+  content_type :json
+  Todo.create(params).to_json
+end
+
+get '/todos' do
+  @todos = Todo.all.reverse
+  erb :index
 end
 

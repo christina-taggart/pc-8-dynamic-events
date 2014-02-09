@@ -17,8 +17,10 @@ $(document).ready(function() {
       url: '/add_todo',
       data: {'todo_content': $('input.todo').val()}
     })
-    .done(function() {
+    .done(function(obj) {
       $('input.todo').val('');
+      var todoDOMObj = buildTodo(obj.todo.todo_content);
+      addTodoToList(todoDOMObj)
     })
     .fail(function() {
       console.log('ajax post to /add_todo failed');
@@ -35,6 +37,9 @@ $(document).ready(function() {
     return $todo;
   }
 
+  function addTodoToList(todoDOMObj) {
+    $('.todo_list').prepend(todoDOMObj);
+  }
 
   bindEvents();
 });

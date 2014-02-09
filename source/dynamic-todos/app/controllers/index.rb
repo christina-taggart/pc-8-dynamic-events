@@ -4,6 +4,6 @@ get '/' do
 end
 
 post '/add_todo' do
-  p "Inside /add_todo route!"
+  Todo.create(params)
 end
 

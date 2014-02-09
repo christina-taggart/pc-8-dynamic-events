@@ -1,0 +1,8 @@
+<h1>Todo App </h1>
+<%= erb :task_creation %>
+<br><h2>Your Tasks</h2>
+
+<ul id="task-list">
+  <%= erb :task_list, locals => @tasks %>
+</ul>
+

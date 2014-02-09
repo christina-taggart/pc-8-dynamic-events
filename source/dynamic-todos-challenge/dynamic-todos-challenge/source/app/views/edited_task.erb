@@ -1,0 +1,10 @@
+<li id="<%= @task.id %>">
+    <h3><%= @task.title%></h3>
+    <%= @task.content %><br>
+    <a class="delete-button" href="/<%= @task.id %>/deleted">Delete task</a>
+    <a class="edit-button" href="/<%= @task.id %>/edit">Edit task</a>
+    <a class="complete-button" href="/<%= @task.id %>/complete">Complete task</a>
+    <% if @task.completed == 1 %>
+      <div class="check-mark">Check Mark.. Bitch!</div>
+    <% end %>
+</li>

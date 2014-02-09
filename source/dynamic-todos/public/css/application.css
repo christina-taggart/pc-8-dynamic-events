@@ -11,3 +11,7 @@
 .todo.complete h2 {
   text-decoration: line-through;
 }
+
+.completed {
+  font-style: italic;
+}

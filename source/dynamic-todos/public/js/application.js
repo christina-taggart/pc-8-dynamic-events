@@ -30,9 +30,16 @@ $(document).ready(function() {
 
   // Complete todo event
   $('.todo_list').on('click', '.complete', function(event) {
-    alert("Yes you clicked on complete");
     event.preventDefault;
-    // other stuff here
+    var todo_content = $(this).parent().children('h2').text();
+    $.ajax({
+      url: '/update_todo',
+      type: 'PUT',
+      data: {"todo_content": todo_content},
+      }).done(function(returnData){
+        var id = returnData.todo.id;
+        $('a[data-num=' + id + ']').parent().addClass('completed');// add class to change styling to italics;
+      });
   })
 
   }

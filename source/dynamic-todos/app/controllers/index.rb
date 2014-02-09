@@ -1,17 +1,20 @@
+
+
 get '/' do
   @todos = Todo.all
   erb :index
 end
 
 post '/todos' do
+  content_type :json
   new_todo = Todo.create(params)
-  new_todo.todo_content
+  {"content" => new_todo.todo_content, "id" => new_todo.id}.to_json
 end
 
 delete '/todos' do
-  deleted_todo = Todo.find_by_todo_content(params[:todoContent])
+  deleted_todo = Todo.find(params[:id])
   deleted_todo.destroy
-  deleted_todo.todo_content
+  deleted_todo.id
 end
 
 patch '/todos' do

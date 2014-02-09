@@ -12,3 +12,7 @@ get '/todos' do
   erb :index
 end
 
+put '/todos/:id' do
+  # do stuff
+end
+

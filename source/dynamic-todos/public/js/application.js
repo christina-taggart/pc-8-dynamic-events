@@ -8,6 +8,10 @@ $(document).ready(function() {
       e.preventDefault();
       addTodo();
     });
+
+    $('div.todo_list').on('click', '.complete', function(e) {
+      e.preventDefault();
+    })
   }
 
   //Create functions to add, remove and complete todos

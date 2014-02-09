@@ -8,7 +8,7 @@
 
   <div class="todo_list">
     <% @todos.each do |todo| %>
-    <div id="todo_template">
+    <div id="todo_template" data-id= <%= todo.id %> >
       <div class="todo">
         <h2 <% if todo.completed %>style="text-decoration: line-through;" <% end %> >
           <%= todo.todo_content %>

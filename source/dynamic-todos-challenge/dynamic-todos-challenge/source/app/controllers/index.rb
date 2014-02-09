@@ -11,8 +11,7 @@ end
 post '/created' do
 	Task.create(params)
 	@task = Task.last
-	@task.to_json
-	# erb :created_task, :layout => false
+	erb :created_task, :layout => false
 end
 
 delete '/:task_id/deleted' do
@@ -22,10 +21,8 @@ delete '/:task_id/deleted' do
 end
 
 put '/:task_id/edited' do
-	p params
 	@task = Task.find(params[:task_id])
 	@task.update_attributes(title: params[:title], content: params[:content])
-	p @task
 	erb :edited_task
 end
 

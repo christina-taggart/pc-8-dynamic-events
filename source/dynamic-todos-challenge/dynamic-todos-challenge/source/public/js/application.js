@@ -5,22 +5,10 @@ $(document).ready(function() {
       type: 'post',
       url: '/created',
       data: $(this).serialize()
-    }).done(function(json) {
-      // $('#task-list').append(erb)
-        var task = $.parseJSON(json).task;
-        var template = "<h3>{{title}}</h3><br>{{content}}<br><a class='delete-button' href='/{{id}}/deleted'>Delete task</a><a class='edit-button' href='/{{id}}/edit'>Edit task</a><a class='complete-button' href='/{{id}}/complete'>Complete task</a>";
-        var html = Mustache.to_html(template, task);
-        console.log(task);
-        $('#task-list').append(html); //add div at the end
-
+    }).done(function(erb) {
+      $('#task-list').append(erb)
     });
   })
-
-//   $.getJSON('json/data.json', function(data) {
-//     var template = "<h1>{{firstName}} {{lastName}}</h1>Blog: {{blogURL}}";
-//     var html = Mustache.to_html(template, data);
-//     $('#sampleArea').html(html);
-// });
 
   $(document).on("click", '.delete-button', function(e){
     e.preventDefault();
@@ -63,43 +51,28 @@ $(document).ready(function() {
     })
   })
 
-
-
-
-
-
-
-
-
-var dragSrcEl = null;
-
+  var dragSrcEl = null;
 function handleDragStart(e) {
-  // Target (this) element is the source node.
   this.style.opacity = '0.4';
-
   dragSrcEl = this;
-
   e.dataTransfer.effectAllowed = 'move';
   e.dataTransfer.setData('text/html', this.innerHTML);
 }
 
 function handleDragOver(e) {
   if (e.preventDefault) {
-    e.preventDefault(); // Necessary. Allows us to drop.
+    e.preventDefault(); 
   }
-
-  e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
-
+  e.dataTransfer.dropEffect = 'move';  
   return false;
 }
 
-function handleDragEnter(e) {
-  // this / e.target is the current hover target.
+function handleDragEnter(e) { 
   this.classList.add('over');
 }
 
 function handleDragLeave(e) {
-  this.classList.remove('over');  // this / e.target is previous target element.
+  this.classList.remove('over');  
 }
 
 var tasks = document.querySelectorAll('li');
@@ -111,19 +84,14 @@ var tasks = document.querySelectorAll('li');
 });
 
 function handleDrop(e) {
-  // this / e.target is current target element.
-
   if (e.stopPropagation) {
-    e.stopPropagation(); // stops the browser from redirecting.
+    e.stopPropagation(); 
   }
-
-  // See the section on the DataTransfer object.
-
   return false;
 }
 
 function handleDragEnd(e) {
-  // this/e.target is the source node.
+  
   this.style.opacity = '1';
   [].forEach.call(tasks, function (task) {
     task.classList.remove('over');
@@ -141,19 +109,13 @@ var tasks = document.querySelectorAll('li');
 });
 
 function handleDrop(e) {
-  // this/e.target is current target element.
-
   if (e.stopPropagation) {
-    e.stopPropagation(); // Stops some browsers from redirecting.
+    e.stopPropagation(); 
   }
-
-  // Don't do anything if dropping the same column we're dragging.
-  if (dragSrcEl != this) {
-    // Set the source column's HTML to the HTML of the column we dropped on.
+  if (dragSrcEl != this) { 
     dragSrcEl.innerHTML = this.innerHTML;
     this.innerHTML = e.dataTransfer.getData('text/html');
   }
-
   return false;
 }
 

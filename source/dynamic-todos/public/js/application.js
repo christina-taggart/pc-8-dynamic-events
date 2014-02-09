@@ -25,6 +25,7 @@ $(document).ready(function() {
     })
   }
 
+
   //-----AJAX REQUEST/RESPONSES-----
 
   // Add Todo
@@ -66,6 +67,7 @@ $(document).ready(function() {
     })
   }
 
+
   //-----DOM/HTML MANIPULATION-----
 
   var appendTodoDiv = function(todoContent, todoId) {
@@ -97,6 +99,10 @@ $(document).ready(function() {
   var getTodoId = function(todoButtonElement) {
     return parseInt(todoButtonElement.parents().eq(2).attr('data-id'));
   }
+
+  
+  //-----DRAG AND DROP-----
+  
 
   bindEvents();
 });

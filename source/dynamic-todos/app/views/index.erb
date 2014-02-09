@@ -9,7 +9,7 @@
   <div class="todo_list">
     <% @todos.each do |todo| %>
     <div id="todo_template">
-      <div class="todo" data-id= <%= todo.id %>>
+      <div class="todo" data-id= <%= todo.id %> draggable="true">
         <h2 <% if todo.completed %>style="text-decoration: line-through;" <% end %> >
           <%= todo.todo_content %>
         </h2>

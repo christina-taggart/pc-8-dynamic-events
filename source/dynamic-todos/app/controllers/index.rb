@@ -1,5 +1,5 @@
 get '/' do
-  @todos = Todo.all
+  @todos = Todo.order(:updated_at)
   erb :index
 end
 

@@ -13,6 +13,8 @@ get '/todos' do
 end
 
 put '/todos/:id' do
-  # do stuff
+  todo = Todo.find(params[:id])
+  todo.completed ? false : true
+  params[:id]
 end
 

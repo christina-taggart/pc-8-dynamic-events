@@ -11,6 +11,8 @@ $(document).ready(function() {
 
     $('div.todo_list').on('click', '.complete', function(e) {
       e.preventDefault();
+      var todoID = $(e.target).parents('div.todo').attr('data-id')
+      completeTodo(todoID)
     })
   }
 
@@ -23,7 +25,7 @@ $(document).ready(function() {
     })
     .done(function(obj) {
       $('input.todo').val('');
-      var todoDOMObj = buildTodo(obj.todo.todo_content);
+      var todoDOMObj = buildTodo(obj.todo.todo_content, obj.todo.id);
       addTodoToList(todoDOMObj)
     })
     .fail(function() {
@@ -31,12 +33,28 @@ $(document).ready(function() {
     });
   };
 
+  function completeTodo(todoID) {
+    $.ajax({
+      type: "PUT",
+      url: "/todos/" + todoID,
+      data: { "id" : todoID }
+    })
+    .done(function(id) {
+      $("[data-id=" + id + "] > h2").css('color', 'green')
+    })
+    .fail(function() {
+      console.log('put request to /todos/id failed')
+    });
+  }
 
-  function buildTodo(todoName) {
+
+  function buildTodo(todoName, todoID) {
     // Creates an jQueryDOMElement from the todoTemplate.
     var $todo = $(todoTemplate);
     // Modifies it's text to use the passed in todoName.
     $todo.find('h2').text(todoName);
+    // Add data-id field to indicate todo id
+    $todo.attr('data-id', todoID)
     // Returns the jQueryDOMElement to be used elsewhere.
     return $todo;
   }

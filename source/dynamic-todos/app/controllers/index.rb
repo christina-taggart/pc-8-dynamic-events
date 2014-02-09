@@ -10,3 +10,10 @@ post '/add_todo' do
   @todo.to_json
 end
 
+delete '/todo/:id' do
+  content_type :json
+  p params
+  @todo = Todo.find(params[:id])
+  @todo.to_json
+end
+

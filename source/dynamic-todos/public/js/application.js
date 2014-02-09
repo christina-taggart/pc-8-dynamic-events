@@ -47,7 +47,7 @@ $(document).ready(function() {
       url: '/todos',
       data: {"id": todoId}
     }).done(function(serverResponse) {
-      removeTodoDiv(serverResponse);
+      removeTodoDiv(serverResponse.id.toString())
     }).fail(function() {
       console.log("Request failed");
     })
@@ -74,9 +74,7 @@ $(document).ready(function() {
 
 
   var removeTodoDiv = function(todoId) {
-    todoDiv = $('#todo_template').filter(function() {
-      return $(this).attr('data-id') === todoId;
-    })
+    todoDiv = $(".todo[data-id='" + todoId + "']")
     todoDiv.remove();
   }
 
@@ -85,15 +83,12 @@ $(document).ready(function() {
     todoHeader.css('text-decoration', 'line-through');
   }
 
-  // Build Todo HTML with given content
+  // Build Todo HTML with given content & id
   var buildTodo = function(todoContent, todoId) {
-    // Creates an jQueryDOMElement from the todoTemplate.
     var $todo = $(todoTemplate);
-    // Modifies it's text to use the passed in todoName.
     $todo.find('h2').text(todoContent);
     $todo.find('h2').attr('style', 'text-decoration: none');
-    $todo.attr('data-id', todoId);
-    // Returns the jQueryDOMElement to be used elsewhere.
+    $todo.attr('data-id', todoId.toString());
     return $todo;
   }
 
@@ -101,7 +96,7 @@ $(document).ready(function() {
   // the todo content found in the same div. The todo content is stored
   // between h2 tags.
   var getTodoId = function(todoButtonElement) {
-    return parseInt(todoButtonElement.parents().eq(3).attr('data-id'));
+    return parseInt(todoButtonElement.parents().eq(2).attr('data-id'));
   }
 
   bindEvents();

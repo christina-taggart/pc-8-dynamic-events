@@ -1,5 +1,8 @@
 $(document).ready(function() {
   var todoTemplate = $.trim($('#todo_template').html());
+  var draggedTodo = null;
+
+  //-----EVENT HANDLERS-----
 
   function bindEvents() {
     
@@ -22,6 +25,46 @@ $(document).ready(function() {
       event.preventDefault();
       todoId = getTodoId($(this));
       completeTodo(todoId);
+    })
+
+
+    //-----drag and drop-----
+
+    $('.todo_list').on('dragstart', '.todo', function(event) {
+      $(this).addClass('dragging');
+      draggedTodo = this;
+      // the dataTranfer object holds the data sent in a drag action:
+      event.originalEvent.dataTransfer.effectAllowed = 'move';
+      event.originalEvent.dataTransfer.setData('text/html', this.innerHTML);
+    })
+
+    $('.todo_list').on('dragend', '.todo', function() {
+      $(this).removeClass('dragging');
+    })
+
+    $('.todo_list').on('dragleave', '.todo', function() {
+      $(this).removeClass('over');
+    })
+
+    $('.todo_list').on('dragover', '.todo', function(event) {
+      if (event.stopPropagation){
+        event.stopPropagation();
+      }
+      $(this).addClass('over');
+      event.originalEvent.dataTransfer.dropEffect = 'move';
+      return false;
+    })
+
+    $('.todo_list').on('drop', '.todo', function(event) {
+      if (event.stopPropagation){
+        event.stopPropagation();
+      }
+      if (draggedTodo != this) {
+        //Swap the HTML of the dragged todo and the todo it is dropped on:
+        draggedTodo.innerHTML = this.innerHTML;
+        this.innerHTML = event.originalEvent.dataTransfer.getData('text/html');
+      }
+      return false;
     })
   }
 
@@ -99,10 +142,6 @@ $(document).ready(function() {
   var getTodoId = function(todoButtonElement) {
     return parseInt(todoButtonElement.parents().eq(2).attr('data-id'));
   }
-
-  
-  //-----DRAG AND DROP-----
-  
 
   bindEvents();
 });

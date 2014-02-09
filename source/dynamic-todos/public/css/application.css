@@ -1,8 +1,16 @@
-#todo {
+.todo {
   width: 200px;
   margin-left: auto;
   margin-right: auto;
   cursor: move;
+}
+
+.todo.dragging {
+  opacity: 0.5;
+}
+
+.todo.over h2 {
+  color: red;
 }
 
 .toolbox {

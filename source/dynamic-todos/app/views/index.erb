@@ -9,10 +9,16 @@
   <div class="todo_list">
       <% @todos.each do |todo| %>
         <div class="todo" data-id=<%= todo.id %>>
-          <h2><%= todo.todo_content %></h2>
+          <% if todo.completed %>
+            <h2 class="complete"><%= todo.todo_content %></h2>
+            <% @complete_text = "Mark Incomplete" %>
+          <% else %>
+            <h2><%= todo.todo_content %></h2>
+            <% @complete_text = "Mark Complete" %>
+          <% end %>
           <ul>
             <li><a href="#" class="delete">Delete</a></li>
-            <li><a href="#" class="complete">Complete</a></li>
+            <li><a href="#" class="complete"><%= @complete_text %></a></li>
           </ul>
         </div>
       <% end %>
@@ -23,7 +29,7 @@
       <h2>Todo Name</h2>
       <ul>
         <li><a href="#" class="delete">Delete</a></li>
-        <li><a href="#" class="complete">Complete</a></li>
+        <li><a href="#" class="complete">Mark Complete</a></li>
       </ul>
     </div>
   </div>

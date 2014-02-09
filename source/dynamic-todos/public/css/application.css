@@ -8,6 +8,7 @@
   text-align: center;
 }
 
-.todo.complete h2 {
+h2.complete {
   text-decoration: line-through;
+  color: green
 }

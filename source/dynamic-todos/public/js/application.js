@@ -39,8 +39,14 @@ $(document).ready(function() {
       url: "/todos/" + todoID,
       data: { "id" : todoID }
     })
-    .done(function(id) {
-      $("[data-id=" + id + "] > h2").css('color', 'green')
+    .done(function(todoObj) {
+      if (todoObj.todo.completed) {
+        $("[data-id=" + todoObj.todo.id + "] > h2").attr('class', 'complete');
+        $("[data-id=" + todoObj.todo.id + "] a.complete").text("Mark Incomplete");
+      } else {
+        $("[data-id=" + todoObj.todo.id + "] > h2").removeAttr('class');
+        $("[data-id=" + todoObj.todo.id + "] a.complete").text("Mark Complete");
+      }
     })
     .fail(function() {
       console.log('put request to /todos/id failed')

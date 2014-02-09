@@ -8,13 +8,18 @@ post '/add_todo' do
 end
 
 get '/todos' do
-  @todos = Todo.all.reverse
+  @todos = Todo.all.sort_by{ |todo| todo.id }.reverse
   erb :index
 end
 
 put '/todos/:id' do
+  content_type :json
   todo = Todo.find(params[:id])
-  todo.completed ? false : true
-  params[:id]
+  if todo.completed
+    todo.update_attributes(completed: false)
+  else
+    todo.update_attributes(completed: true)
+  end
+  todo.to_json
 end
 

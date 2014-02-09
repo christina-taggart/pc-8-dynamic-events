@@ -1,5 +1,3 @@
-
-
 get '/' do
   @todos = Todo.all
   erb :index
@@ -22,9 +20,10 @@ end
 
 # Complete todo
 patch '/todos' do
-  completed_todo = Todo.find_by_todo_content(params[:todoContent])
+  content_type :json
+  completed_todo = Todo.find(params[:id].to_i)
   completed_todo.completed = true
   completed_todo.save
-  completed_todo.todo_content
+  {"id" => completed_todo.id}.to_json
 end 
 

@@ -20,8 +20,8 @@ $(document).ready(function() {
     // Complete todo event handler
     $('.todo_list').on('click', '.complete', function(event) {
       event.preventDefault();
-      todoContent = getTodoContent($(this));
-      completeTodo(todoContent);
+      todoId = getTodoId($(this));
+      completeTodo(todoId);
     })
   }
 
@@ -54,13 +54,13 @@ $(document).ready(function() {
   }
 
   // Complete todo
-  var completeTodo = function(todoContent) {
+  var completeTodo = function(todoId) {
     $.ajax({
       method: 'patch',
       url: '/todos',
-      data: {"todoContent": todoContent}
+      data: {"id": todoId}
     }).done(function(serverResponse) {
-      completeTodoDiv(serverResponse);
+      completeTodoDiv(serverResponse.id.toString());
     }).fail(function() {
       console.log("Request failed");
     })
@@ -79,7 +79,7 @@ $(document).ready(function() {
   }
 
   var completeTodoDiv = function(todoContent) {
-    todoHeader = $('h2').filter(function() { return $(this).text() === todoContent } );
+    todoHeader = $(".todo[data-id='" + todoId + "']").find('h2');
     todoHeader.css('text-decoration', 'line-through');
   }
 
@@ -93,8 +93,7 @@ $(document).ready(function() {
   }
 
   // Helper that takes a '.delete' or '.complete' DOMElement and returns
-  // the todo content found in the same div. The todo content is stored
-  // between h2 tags.
+  // the todo data-id found in the same div.
   var getTodoId = function(todoButtonElement) {
     return parseInt(todoButtonElement.parents().eq(2).attr('data-id'));
   }

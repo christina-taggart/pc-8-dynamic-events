@@ -23,3 +23,8 @@ put '/todos/:id' do
   todo.to_json
 end
 
+delete '/todos/:id' do
+  Todo.find(params[:id]).destroy
+  params[:id]
+end
+

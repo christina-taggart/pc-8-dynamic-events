@@ -11,9 +11,19 @@ $(document).ready(function() {
 
     $('div.todo_list').on('click', '.complete', function(e) {
       e.preventDefault();
-      var todoID = $(e.target).parents('div.todo').attr('data-id')
-      completeTodo(todoID)
-    })
+      var todoID = $(e.target).parents('div.todo').attr('data-id');
+      completeTodo(todoID);
+    });
+
+    $('div.todo_list').on('click', '.delete', function(e) {
+      e.preventDefault();
+      if (confirm('Are you sure you want to delete this?') == false) {
+        return;
+      }
+      var todoID = $(e.target).parents('div.todo').attr('data-id');
+      deleteTodo(todoID);
+    });
+
   }
 
   //Create functions to add, remove and complete todos
@@ -50,6 +60,17 @@ $(document).ready(function() {
     })
     .fail(function() {
       console.log('put request to /todos/id failed')
+    });
+  }
+
+  function deleteTodo(todoID) {
+    $.ajax({
+      type: 'DELETE',
+      url: "/todos/" + todoID,
+      data: { "id" : todoID }
+    })
+    .done(function(todoID) {
+      $("[data-id=" + todoID + "]").remove();
     });
   }
 

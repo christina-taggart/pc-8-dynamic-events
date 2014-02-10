@@ -56,6 +56,7 @@ $(document).ready(function() {
     })
 
     $('.todo_list').on('drop', '.todo', function(event) {
+      $(this).removeClass('over');
       if (event.stopPropagation){
         event.stopPropagation();
       }

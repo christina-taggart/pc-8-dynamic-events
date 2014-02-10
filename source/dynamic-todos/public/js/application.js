@@ -1,5 +1,6 @@
 $(document).ready(function() {
-  var todoTemplate = $.trim($('#todo_template').html());
+  
+  var todoTemplate = $.trim($('#todo_template').html()); 
   var draggedTodo = null;
 
   //-----EVENT HANDLERS-----
@@ -116,12 +117,14 @@ $(document).ready(function() {
 
   var appendTodoDiv = function(todoContent, todoId) {
     $('.todo_list').append(buildTodo(todoContent, todoId));
+    renderTodoCounter();
   }
 
 
   var removeTodoDiv = function(todoId) {
     todoDiv = $(".todo[data-id='" + todoId + "']")
     todoDiv.remove();
+    renderTodoCounter();
   }
 
   var completeTodoDiv = function(todoContent) {
@@ -144,7 +147,26 @@ $(document).ready(function() {
     return parseInt(todoButtonElement.parents().eq(2).attr('data-id'));
   }
 
+
+  //-----MUSTACHE EXPERIMENTS-----
+
+  var counterView = {
+    todo_count: function() {
+      return $('.todo').length
+    }
+  }
+
+
+  var renderTodoCounter = function() {
+    var counterOutput = Mustache.render("You have {{todo_count}} todos.", counterView);
+    $('.todo-counter').html(counterOutput);
+  }
+
+
+  //-----GET THE PARTY STARTED-----
+
   bindEvents();
+  renderTodoCounter();
 });
 
 

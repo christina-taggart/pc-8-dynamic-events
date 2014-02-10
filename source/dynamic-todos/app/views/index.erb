@@ -1,10 +1,12 @@
 <div id="todo">
   <div class="toolbox">
     <form action="/todos" method="post">
-      <input type="text" class="todo" name="todo_content" placeholder="Put your todo item here!"/>
+      <input type="text" name="todo_content" placeholder="Put your todo item here!"/>
       <input type="submit" value="Add Todo"/>
     </form>
   </div>
+
+  <div class="todo-counter"></div> 
 
   <div class="todo_list">
     <% @todos.each do |todo| %>
@@ -20,6 +22,5 @@
       </div>
     </div>
     <% end %>
-  </div>
-
+  </div> 
 </div>

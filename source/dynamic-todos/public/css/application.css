@@ -4,6 +4,7 @@
   padding: 30px;
   background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #00A3EF 100%);
   border: solid 1px black;
+  height: 800px;
 }
 
 .toolbox {
@@ -20,4 +21,10 @@
 
 a {
   text-decoration: none
+}
+
+li {
+  background-color: silver;
+  width: 100px;
+  height: 100px;
 }

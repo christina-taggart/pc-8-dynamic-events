@@ -24,7 +24,13 @@ a {
 }
 
 li {
-  background-color: silver;
+  background-color: white;
   width: 100px;
   height: 100px;
+  list-style: none;
+  text-align: center
+}
+
+li h2 {
+  padding-top: 10px;
 }

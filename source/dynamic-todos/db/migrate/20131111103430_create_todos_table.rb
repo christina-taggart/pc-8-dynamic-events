@@ -3,7 +3,7 @@ class CreateTodosTable < ActiveRecord::Migration
     create_table :todos do |t|
       t.string :todo_content
 
-      t.timestamp
+      t.timestamps
     end
   end
 end

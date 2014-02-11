@@ -11,3 +11,19 @@
 .todo.complete h2 {
   text-decoration: line-through;
 }
+
+/*#todo_template {
+  display: none;
+}*/
+
+.completed-item {
+  color: green;
+}
+
+#todo_template{
+  cursor: move;
+}
+
+.todo.over {
+  border: 2px dashed #000;
+}

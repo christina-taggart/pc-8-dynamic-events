@@ -1,0 +1,9 @@
+  <div id="todo_template">
+    <div class="todo">
+      <h2><%= @todo.todo_content %></h2>
+      <ul>
+        <li><a data-id="<%= @todo.id %>" href="#" class="delete">Delete</a></li>
+        <li><a data-id="<%= @todo.id %>" href="#" class="complete">Complete</a></li>
+      </ul>
+    </div>
+  </div>

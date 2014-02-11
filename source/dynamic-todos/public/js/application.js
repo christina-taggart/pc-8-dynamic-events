@@ -19,6 +19,34 @@ function bindEvents() {
     event.preventDefault;
     completeTodo($(this));
   })
+  // binds dragstart
+  $('.todo_list').on('dragstart', 'li', function(event) {
+    event.preventDefault;
+  })
+  // binds drag
+  $('.todo_list').on('drag', 'li', function(event) {
+    event.preventDefault;
+  })
+  // binds dragenter
+  $('.todo_list').on('dragenter', 'li', function(event) {
+    event.preventDefault;
+  })
+  // binds dragleave
+  $('.todo_list').on('dragleave', 'li', function(event) {
+    event.preventDefault;
+  })
+  // binds dragover
+  $('.todo_list').on('dragover', 'li', function(event) {
+    event.preventDefault;
+  })
+  // binds drop
+  $('.todo_list').on('drop', 'li', function(event) {
+    event.preventDefault;
+  })
+  // binds dragend
+  $('.todo_list').on('dragend', 'li', function(event) {
+    event.preventDefault;
+  })
 }
 
 function addTodo(todo) {
@@ -64,3 +92,5 @@ function completeTodo(todo) {
 function modifyTodo(dataFromServer) {
   $('a[data-num=' + dataFromServer.todo.id + ']').parent().addClass('completed');
 }
+
+

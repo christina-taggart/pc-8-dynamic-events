@@ -24,6 +24,9 @@ $(document).ready(function() {
       deleteTodo(todoID);
     });
 
+    // Initial setup of draggable and resizeable elements
+    jQuery.each($('div.todo'), function(idx, val) {$(val).draggable().resizable();});
+
   }
 
   //Create functions to add, remove and complete todos
@@ -87,6 +90,7 @@ $(document).ready(function() {
   }
 
   function addTodoToList(todoDOMObj) {
+    todoDOMObj.draggable().resizable();
     $('.todo_list').prepend(todoDOMObj);
   }
 

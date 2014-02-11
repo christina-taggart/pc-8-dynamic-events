@@ -22,6 +22,7 @@ function bindEvents() {
   // binds dragstart
   $('.todo_list').on('dragstart', 'li', function(event) {
     event.preventDefault;
+    handleDragStart(event);
   })
   // binds drag
   $('.todo_list').on('drag', 'li', function(event) {
@@ -40,9 +41,11 @@ function bindEvents() {
     event.preventDefault;
   })
   // binds drop
-  $('.todo_list').on('drop', 'li', function(event) {
-    event.preventDefault;
-  })
+  // $('.todo_list').on('drop', 'li', function(event) {
+  //   event.preventDefault;
+  //   console.log("drop!!!");
+  //   handleDrop(event);
+  // })
   // binds dragend
   $('.todo_list').on('dragend', 'li', function(event) {
     event.preventDefault;
@@ -93,4 +96,20 @@ function modifyTodo(dataFromServer) {
   $('a[data-num=' + dataFromServer.todo.id + ']').parent().addClass('completed');
 }
 
+function handleDragStart(e) {
+  dragSrcEl = this;
+  e.originalEvent.dataTransfer.effectAllowed = 'move';
+  e.originalEvent.dataTransfer.setData('text/html', this.innerHTML);
+}
 
+// function handleDrop(e) {
+//   if (e.stopPropagation){
+//     e.stopPropagation();
+//   }
+
+//   if (dragSourceElement != this){
+//     dragSourceElement.innerHTML = this.innerHTML;
+//     this.innerHTML = e.originalEvent.dataTransfer.getData('text/html');
+//   }
+//   return false;
+// }

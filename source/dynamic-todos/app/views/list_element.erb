@@ -1,0 +1,9 @@
+<% todo = @todo if @todo %>
+
+<div class='todo<%= " complete" if todo.completed %>' draggable="true">
+  <h2><%= todo.todo_content %></h2>
+  <ul>
+    <li><a href="#" class="delete" data-id='<%= todo.id  %>'>Delete</a></li>
+    <li><a href="#" class="complete" data-id='<%= todo.id %>'>Complete</a></li>
+  </ul>
+</div>

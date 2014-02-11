@@ -6,6 +6,23 @@ $(document).ready(function() {
     // elements
   }
 
+  $('form').on('submit', function(e) {
+    e.preventDefault()
+    $('.todo_list').append(buildTodo($('input').val()))
+  })
+  
+   $('.todo_list').on('click', '.delete', function(e){
+    e.preventDefault()
+    $(this).closest('.todo').remove()
+   })
+
+   $('.todo_list').on('click', '.complete', function(){
+
+    $(this).closest('ul').siblings('h2').css('text-decoration', 'line-through')
+    $(this).closest('.todo').insertAfter('.todo_list:last')
+   })
+
+
   //Create functions to add, remove and complete todos
 
 

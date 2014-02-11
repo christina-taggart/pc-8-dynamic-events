@@ -36,7 +36,7 @@ $(document).ready(function() {
       url: $(this).attr('href'),
       type: 'DELETE',
       success: function(delete_response) {
-        $('div.todoid_'+delete_response).remove()
+        $('div.todoid_'+delete_response.todo.id).remove()
       }
     })
   }

@@ -18,7 +18,8 @@ put '/todos/:id' do
 end
 
 delete '/todos/:id' do
+	content_type :json
 	@todo = Todo.find(params[:id])
 	@todo.destroy
-	params[:id]
+	@todo.to_json
 end

@@ -5,18 +5,15 @@ end
 
 post '/todos' do
 	content_type :json
-  p "Inside /add_todo route!"
-  new_todo = params[:new_todo]
-  @todo = Todo.create(new_todo)
+  @todo = Todo.create(params)
   @todo.to_json
 end
 
 put '/todos/:id' do
 	content_type :json
-  p "Inside /add_todo route!"
-  @new_todo = Todo.find(params[:id])
-  new_todo = params[:new_todo]
-  @todo = Todo.create(new_todo)
+	update_user = params[:update_user]
+  @todo = Todo.find(update_user[:id])
+  @todo.update_attributes(update_user)
   @todo.to_json
 end
 

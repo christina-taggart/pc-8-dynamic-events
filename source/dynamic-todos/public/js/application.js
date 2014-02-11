@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-  var todoTemplate = $.trim($('#todo_template').html());
-
   function bindEvents() {
 
     $('form').submit(function(e){
@@ -9,30 +7,29 @@ $(document).ready(function() {
       $.post('/add_todo', $(this).serialize()).done(function(response){
         $(".todo_list").append(response);
       });
-    })
+    });
 
     $(".todo_list").on('click', '.delete', function(e){
-        var $this = $(this)
-        var todo_id = $this.data('id');
-        $.ajax({
-          url: 'todos/' + todo_id,
-          type: 'DELETE',
-        }).done(function(response) {
-          $this.closest('div').fadeOut();
-          $this.remove();
-        })
-    })
+      var $this = $(this)
+      var todo_id = $this.data('id');
+      $.ajax({
+        url: 'todos/' + todo_id,
+        type: 'DELETE',
+      }).done(function(response) {
+        $this.closest('div').fadeOut();
+      });
+    });
 
     $(".todo_list").on('click', '.complete', function(e){
-        var $this = $(this)
-        var todo_id = $this.data('id');
-        $.ajax({
-          url: 'todos/' + todo_id,
-          type: 'put',
-        }).done(function(response) {
-          $this.closest('div').addClass('complete')
-        })
-    })
+      var $this = $(this)
+      var todo_id = $this.data('id');
+      $.ajax({
+        url: 'todos/' + todo_id,
+        type: 'put',
+      }).done(function(response) {
+        $this.closest('div').addClass('complete')
+      });
+    });
   }
 
   function handleDrags(){

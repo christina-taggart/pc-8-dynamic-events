@@ -1,5 +1,4 @@
 get '/' do
-  # Look in app/views/index.erb
   @todos = Todo.all
   erb :index
 end

@@ -29,10 +29,10 @@ function addTodo(todo) {
   });
 }
 
-function displayNewTodo(dataFromServer) {
-  $('.todo_list').append('<div class="draggable"><li><h2>' + dataFromServer.todo.todo_content + '</h2> <a class="delete" data-num="' 
-      + dataFromServer.todo.id + '"href="#">Delete</a> <a class="complete" data-num="' 
-      + dataFromServer.todo.id + '"href="#">Complete</a> </li></div>');
+function displayNewTodo(response) {
+  $('.todo_list').append('<div class="draggable"><li><h2>' + response.todo.todo_content + '</h2> <a class="delete" data-num="' 
+      + response.todo.id + '"href="#">Delete</a> <a class="complete" data-num="' 
+      + response.todo.id + '"href="#">Complete</a> </li></div>');
 }
 
 function deleteTodo(todo) {
@@ -47,8 +47,8 @@ function deleteTodo(todo) {
     });
 }
 
-function removeTodo(dataFromServer) {
-  $('a[data-num=' + dataFromServer.todo.id + ']').parent().remove();
+function removeTodo(response) {
+  $('a[data-num=' + response.todo.id + ']').parent().remove();
 }
 
 function completeTodo(todo) {
@@ -62,6 +62,6 @@ function completeTodo(todo) {
     });
 }
 
-function modifyTodo(dataFromServer) {
-  $('a[data-num=' + dataFromServer.todo.id + ']').parent().addClass('completed');
+function modifyTodo(response) {
+  $('a[data-num=' + response.todo.id + ']').parent().addClass('completed');
 }

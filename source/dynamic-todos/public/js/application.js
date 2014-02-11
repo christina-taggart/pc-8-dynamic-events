@@ -29,10 +29,13 @@ function addTodo(todo) {
   });
 }
 
-function displayNewTodo(response) {
-  $('.todo_list').append('<div class="draggable"><li><h2>' + response.todo.todo_content + '</h2> <a class="delete" data-num="' 
-      + response.todo.id + '"href="#">Delete</a> <a class="complete" data-num="' 
-      + response.todo.id + '"href="#">Complete</a> </li></div>');
+function displayNewTodo(dataFromServer) {
+  var template = document.getElementById('todo_template').innerHTML;
+  var newTodoView = {
+    name: dataFromServer.todo.todo_content,
+    id: dataFromServer.todo.id
+  };
+  $('.todo_list').append(Mustache.render(template, newTodoView));
 }
 
 function deleteTodo(todo) {

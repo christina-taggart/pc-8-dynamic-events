@@ -13,11 +13,11 @@
 
   <div id="todo_template" style="display: none;">
     <div class="todo">
-      <h2>Todo Name</h2>
-      <ul>
-        <li><a href="#" class="delete">Delete</a></li>
-        <li><a href="#" class="complete">Complete</a></li>
-      </ul>
+      <li>
+        <h2>{{name}}</h2>
+          <a href="#" class="delete" data-num="{{id}}">Delete</a>
+          <a href="#" class="complete" data-num="{{id}}">Complete</a>
+      </li>
     </div>
   </div>
 </div>

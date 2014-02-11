@@ -16,6 +16,7 @@
 }
 
 .completed {
+  background: #ccc;
   font-style: italic;
 }
 

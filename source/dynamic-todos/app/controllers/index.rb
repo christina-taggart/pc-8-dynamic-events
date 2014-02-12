@@ -10,9 +10,13 @@ end
 
 delete '/todos/:id' do
   todo_id = params[:id]
-  p todo_id
   todo_delete = Todo.find(todo_id)
   todo_delete.destroy
-  todo_id
+end
+
+put '/todos/:id' do
+  todo_id = params[:id]
+  todo_update = Todo.find(todo_id)
+  todo_update.update_attribute(:completed, true)
 end
 

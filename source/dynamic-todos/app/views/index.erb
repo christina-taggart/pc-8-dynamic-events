@@ -12,8 +12,8 @@
       <div class="single-todo">
         <h2 class="todo_name"><%= todo.todo_content %></h2>
         <ul>
-          <li><a href="/todos/<%= todo.id %>" class="delete">Delete</a></li>
-          <li><a href="#" class="complete">Complete</a></li>
+          <li><a href="#" class="delete" data-url="/todos/<%= todo.id %>" >Delete</a></li>
+          <li><a href="#" class="complete" data-url="/todos/<%= todo.id %>">Complete</a></li>
         </ul>
       </div>
     <% end %>

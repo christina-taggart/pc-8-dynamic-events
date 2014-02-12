@@ -12,7 +12,7 @@ end
 put '/todos' do
 	content_type :json
 	updated_todo = Todo.find_by_todo_content(params[:todo_content])
-	updated_todo.update_attribute(completed: true)
+	updated_todo.update_attributes(completed: true)
 	updated_todo.to_json
 end
 

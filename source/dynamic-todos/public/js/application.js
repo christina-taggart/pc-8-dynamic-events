@@ -8,12 +8,12 @@ $(document).ready(function() {
       addTodo(todo)
     });
 
-    $('.todo_list').on('submit', 'li .complete', function(event) {
+    $('.todo_list').on('click', 'a.complete', function(event) {
       event.preventDefault();
       completeTodo($(this))
     });
 
-    $('.todo_list').on('submit', 'li .delete', function(event) {
+    $('.todo_list').on('click', 'a.delete', function(event) {
       event.preventDefault();
       deleteTodo($(this))
     });
@@ -34,7 +34,7 @@ $(document).ready(function() {
     $.ajax({
       type: "put",
       url: "/todos",
-      data: toDoContent
+      data: {todo_content: toDoContent}
     }).done(function(serverResponse) {
 
     }).fail(console.log("completeTodo failed"))
@@ -44,9 +44,9 @@ $(document).ready(function() {
     $.ajax({
       type: "delete",
       url: "/todos",
-      data: toDoContent
+      data: {todo_content: toDoContent}
     }).done(function(serverResponse) {
-
+      serverResponse.remove();
     }).fail(console.log("deleteTodo failed"))
   }
 

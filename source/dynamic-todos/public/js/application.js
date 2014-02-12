@@ -24,18 +24,26 @@ $(document).ready(function() {
     $this = $(this)
     var id = $this.data('id')
     event.preventDefault();
-    console.log(this);
-    console.log("delete!!!");
     $.ajax({
       method: 'delete',
       url: '/todo_list/' + id
     }).done( function(){
-      $this.closest('.todo').remove()
+      $this.closest('.todo').remove();
     })
   })
 
-
-
+  $('.complete').on('click', function(event){
+    debugger;
+    $this = $(this)
+    var id = $this.data('id')
+    event.preventDefault();
+    $.ajax({
+      method: 'patch',
+      url: '/todo_list/' + id
+    }).done( function(){
+      $this.closest('.todo').addClass('complete')
+    })
+  })
 
   function buildTodo(todo) {
     // Creates an jQueryDOMElement from the todoTemplate.
@@ -46,14 +54,6 @@ $(document).ready(function() {
     $todo.find('a.delete').data('id', todo.id);
     return $todo;
   }
-
-
-  // function completeTodo(todo) {
-  //   var $todo = $(todoTemplate);
-  //   $todo.find('#content').css('')
-  //   return $todo;
-  // }
-
 
   bindEvents();
 });

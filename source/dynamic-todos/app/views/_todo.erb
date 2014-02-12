@@ -1,9 +1,10 @@
 <% if todo %>
   <% todo_content = todo.todo_content %>
   <% id = todo.id %>
+  <% todo.completed ? complete = 'complete' : nil %>
 <% end %>
 
-<div class="todo">
+<div class="todo <%= complete %>">
   <h2 id="content">
     <%= todo_content %>
   </h2>

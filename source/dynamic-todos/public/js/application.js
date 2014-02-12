@@ -2,8 +2,49 @@ $(document).ready(function() {
   var todoTemplate = $.trim($('#todo_template').html());
 
   function bindEvents() {
-    // Bind functions which add, remove, and complete todos to the appropriate
-    // elements
+    // add, complete, delete
+
+    //add
+    $('form').on('submit', function(e){
+      e.preventDefault();
+      var input = $('input').val();
+      $.ajax({
+        type: "POST",
+        url: "/add_todo",
+        data: {input: input }
+      }).done(function () {
+        $('.todo_list').append(buildTodo(input))
+      })
+
+    })
+
+
+    //delete
+   $('.todo_list').on('click', '.delete', function(e){
+    e.preventDefault();
+    $(this).closest('.todo').remove()
+    var toDo=$(this).closest('ul').siblings('h2').text()
+    $.ajax({
+      type: "DELETE",
+      url: "/delete_todo",
+      data: {toDo:toDo}
+    })
+   })
+
+   //complete
+
+  $('.todo_list').on('click', '.complete', function(){
+         $(this).closest('ul').siblings('h2').css('opacity', '0.3')
+      var toDo = $(this).closest('ul').siblings('h2').text()
+      $.ajax({
+        type: "POST",
+        url: "/complete_todo",
+        data: {toDo: toDo}
+        })
+        .done(function () {
+      })
+   })
+
   }
 
   //Create functions to add, remove and complete todos

@@ -1,9 +1,18 @@
 get '/' do
-  # Look in app/views/index.erb
   erb :index
 end
 
 post '/add_todo' do
-  p "Inside /add_todo route!"
+	redirect '/'
 end
+
+delete '/delete_todo' do
+	delete_todo = Todo.where(params).destroy
+
+end
+
+post '/complete_todo' do
+	complete_todo=Todo.where(params)
+end
+
 

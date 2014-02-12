@@ -2,11 +2,35 @@ $(document).ready(function() {
   var todoTemplate = $.trim($('#todo_template').html());
 
   function bindEvents() {
-    // Bind functions which add, remove, and complete todos to the appropriate
-    // elements
-  }
+
+    $('.toolbox form').on('submit', function(event) {
+      event.preventDefault();
+      todoData = $(this).serialize();
+      $.ajax({
+        type: this.method,
+        url: this.action,
+        data: todoData
+      }).done( function(serverResponse) {
+        $('.display-todos').append(serverResponse);
+      })
+    });
+
+    $('.display-todos').on('click', '.delete', function(event) {
+      event.preventDefault();
+      var url = this.href;
+      this.parentElement.parentElement.parentElement.remove();
+      $.ajax({
+        type: 'delete',
+        url: url
+      }).fail(function(){
+        alert("can't delete")
+      })
+
+      })
+    }
 
   //Create functions to add, remove and complete todos
+
 
 
 
@@ -18,7 +42,6 @@ $(document).ready(function() {
     // Returns the jQueryDOMElement to be used elsewhere.
     return $todo;
   }
-
 
   bindEvents();
 });

@@ -1,0 +1,14 @@
+<br>
+List of outstanding tasks
+  <table>
+  <br>
+  <% @todos.each do |todo| %>
+    <form name="todo_partial" method="post" action="/todo/<%= todo.id %>">
+    <tr>
+      <td><button class="complete" type="submit" formmethod="get" formaction="/todo/<%= todo.id %>/edit">Complete</button>
+      <td><input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Delete">
+      <td><input type="text" value="<%= todo.todo_content %>" readonly>
+      </form>
+  <% end %>
+  </table>

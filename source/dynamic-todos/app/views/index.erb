@@ -1,23 +1,18 @@
 <div id="todo">
   <div class="toolbox">
-    <form action="/add_todo" method="post">
-      <input type="text" class="todo" value="Put your todo item here!"/>
+    <form action="/todo" method="post">
+      <input name ="todo_content" type="text" class="todo"/>
       <input type="submit" value="Add Todo"/>
       <!-- <button class="add" type="submit">Add Todo</button> -->
     </form>
   </div>
 
   <div class="todo_list">
-
+    <%= erb :todo_partial %>
   </div>
 
-  <div id="todo_template" style="display: none;">
-    <div class="todo">
-      <h2>Todo Name</h2>
-      <ul>
-        <li><a href="#" class="delete">Delete</a></li>
-        <li><a href="#" class="complete">Complete</a></li>
-      </ul>
-    </div>
+
+  <div id="todo_template">
+    <%= erb :completed_partial %>
   </div>
 </div>

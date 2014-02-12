@@ -4,6 +4,24 @@ $(document).ready(function() {
   function bindEvents() {
     // Bind functions which add, remove, and complete todos to the appropriate
     // elements
+
+    $('.todo_partial').on('click', '.complete', completeThis())
+    $('.todo_partial').on('click', '.delete', delethisThis())
+
+    function completeThis(){
+      $.ajax({
+        type: 'put'
+        url: '/todo/:id/edit'
+      })
+    }
+
+    function deleteThis(){
+      $.ajax({
+        type: 'delete'
+        url: '/todo/:id/edit'
+      })
+    }
+
   }
 
   //Create functions to add, remove and complete todos
@@ -22,3 +40,4 @@ $(document).ready(function() {
 
   bindEvents();
 });
+

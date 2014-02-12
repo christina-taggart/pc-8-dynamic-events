@@ -1,0 +1,13 @@
+  <br>
+  Completed tasks
+  <table>
+  <br>
+  <% @completed.each do |finished| %>
+    <form method="post" action="/todo/<%= finished.id %>">
+    <tr>
+      <td><input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Delete">
+      <td><input type="text" value="<%= finished.todo_content %>" readonly>
+      </form>
+  <% end %>
+  </table>

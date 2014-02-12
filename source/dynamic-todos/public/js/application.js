@@ -21,18 +21,20 @@ $(document).ready(function() {
   })
 
   $('.delete').on('click', function(event){
-    debugger;
+    $this = $(this)
+    var id = $this.data('id')
     event.preventDefault();
     console.log(this);
     console.log("delete!!!");
     $.ajax({
       method: 'delete',
-      url: '/todo_list/' + $('a.delete').data('id')
-    }).done( function(response){
-    debugger;
-      deleteTodo(response.id);
+      url: '/todo_list/' + id
+    }).done( function(){
+      $this.closest('.todo').remove()
     })
   })
+
+
 
 
   function buildTodo(todo) {
@@ -45,11 +47,13 @@ $(document).ready(function() {
     return $todo;
   }
 
-  function deleteTodo(todo_id) {
-    var $todo = $(todoTemplate);
-    $todo.find(todo_id).remove();
-    return $todo;
-  }
+
+  // function completeTodo(todo) {
+  //   var $todo = $(todoTemplate);
+  //   $todo.find('#content').css('')
+  //   return $todo;
+  // }
+
 
   bindEvents();
 });

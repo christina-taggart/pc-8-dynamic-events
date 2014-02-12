@@ -14,7 +14,15 @@ delete '/todo_list/:id' do
   content_type :json
   @delete_todo = Todo.find(params[:id])
   @delete_todo.destroy
-  {id: @delete_todo.id}.to_json
+  200.to_json
 end
+
+# patch '/todo_list/:id' do
+#   content_type :json
+#   @complete_todo = Todo.find(params[:id])
+#   @complete_todo.completeted = true
+#    @completed_todo.save
+#   {id: @complete_todo.id}.to_json
+# end
 
 

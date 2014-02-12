@@ -1,11 +1,14 @@
+<% if todo %>
+  <% todo_content = todo.todo_content %>
+  <% id = todo.id %>
+<% end %>
+
 <div class="todo">
   <h2 id="content">
-    <% if todo %>
-      <%= todo.todo_content %>
-    <% end %>
+    <%= todo_content %>
   </h2>
   <ul>
-    <li><a href="#" data-id="" class="delete">Delete</a></li>
-    <li><a href="#" data-id="" class="complete">Complete</a></li>
+    <li><a href="#" data-id="<%= id %>" class="delete">Delete</a></li>
+    <li><a href="#" data-id="<%= id %>" class="complete">Complete</a></li>
   </ul>
 </div>
